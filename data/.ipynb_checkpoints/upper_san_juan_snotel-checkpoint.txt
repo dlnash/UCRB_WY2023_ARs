@@ -1,0 +1,92 @@
+#------------------------------------------------- WARNING --------------------------------------------
+# 
+# The data you have obtained from this automated Natural Resources Conservation Service 
+# database are subject to revision regardless of indicated Quality Assurance level. 
+# Data are released on condition that neither the NRCS nor the United States Government 
+# may be held liable for any damages resulting from its use. 
+# 
+# SNOTEL air temperature data contains a known bias. This bias is rooted in the sensor 
+# conversion equation and varies through the output range. Solutions are in development. 
+# For more information go to Air Temperature Bias Correction. 
+# 
+# Help and Tutorials: https://www.nrcs.usda.gov/sites/default/files/2023-03/Report%20Generator%20Help%20Guide.pdf
+# Air Temperature Bias Correction: https://www.nrcs.usda.gov/wps/portal/wcc/home/snowClimateMonitoring/temperature/temperatureBiasCorrection/
+# 
+# Support Contact: usdafpacbc@servicenowservices.com
+# 
+#------------------------------------------------------------------------------------------------------
+# 
+# Reporting Frequency: Daily
+# Date Range: 2024-03-12
+#
+# Data for the following site(s) are contained in this file:
+#
+#	SNOTEL 327: Beartown, CO
+#	SNOTEL 387: Cascade #2, CO
+#	SNOTEL 409: Columbine Pass, CO
+#	SNOTEL 904: Columbus Basin, CO
+#	SNOTEL 465: El Diente Peak, CO
+#	SNOTEL 586: Lizard Head Pass, CO
+#	SNOTEL 589: Lone Cone, CO
+#	SNOTEL 905: Mancos, CO
+#	SNOTEL 629: Mineral Creek, CO
+#	SNOTEL 632: Molas Lake, CO
+#	SNOTEL 713: Red Mountain Pass, CO
+#	SNOTEL 739: Scotch Creek, CO
+#	SNOTEL 1060: Sharkstooth, CO
+#	SNOTEL 780: Spud Mountain, CO
+#	SNOTEL 797: Stump Lakes, CO
+#	SNOTEL 840: Upper San Juan, CO
+#	SNOTEL 843: Vallecito, CO
+#	SNOTEL 1160: Weminuche Creek, CO
+#	SNOTEL 874: Wolf Creek Summit, CO
+# 
+# Data items provided in this file:
+#
+# Element Name  Value Type  Function Type  Function Duration  Base Data  Measurement Units  Sensor Depth  Element Code  Description  
+# 
+# Quality Control flags included:
+#
+# Flag    Name                Description
+#  V      Valid               Validated Data
+#  N      No Profile          No profile for automated validation
+#  E      Edit                Edit, minor adjustment for sensor noise
+#  B      Back Estimate       Regression-based estimate for homogenizing collocated Snow Course and Snow Pillow data sets
+#  K      Estimate            Estimate
+#  X      External Estimate   External estimate
+#  S      Suspect             Suspect data
+# 
+# Quality Assurance flags included:
+#
+# Flag    Name                Description
+#  U      Unknown             Unknown
+#  R      Raw                 No Human Review
+#  P      Provisional         Preliminary Human Review
+#  A      Approved            Processing and Final Review Completed
+# 
+#------------------------------------------------------------------------------------------------------
+# 
+# Metadata Report
+#
+# As of: Mar 12, 2024, 10:52:37 AM GMT-08:00
+#
+Station Id,State Code,Network Code,Station Name,Elevation,Latitude,Longitude,County Name,HUC8 (8-digit),HUC8 Name,Start Date,End Date
+327,CO,SNTL,Beartown,11600,37.71433,-107.51240,San Juan,13010001,Rio Grande Headwaters,1979-10-01,2100-01-01
+387,CO,SNTL,Cascade #2,9012,37.65751,-107.80287,San Juan,14080104,Animas,1990-09-30,2100-01-01
+409,CO,SNTL,Columbine Pass,9171,38.41819,-108.38313,Montrose,14020005,Lower Gunnison,1985-10-01,2100-01-01
+904,CO,SNTL,Columbus Basin,10781,37.44146,-108.02468,La Plata,14080105,Middle San Juan,1994-08-30,2100-01-01
+465,CO,SNTL,El Diente Peak,10217,37.78607,-108.02235,Dolores,14030002,Upper Dolores,1985-10-01,2100-01-01
+586,CO,SNTL,Lizard Head Pass,10193,37.79895,-107.92475,Dolores,14030002,Upper Dolores,1979-10-01,2100-01-01
+589,CO,SNTL,Lone Cone,9755,37.89169,-108.19636,San Miguel,14030003,San Miguel,1979-10-01,2100-01-01
+905,CO,SNTL,Mancos,10044,37.43109,-108.17005,Montezuma,14080107,Mancos,1994-08-30,2100-01-01
+629,CO,SNTL,Mineral Creek,10046,37.84737,-107.72657,San Juan,14080104,Animas,1978-10-01,2100-01-01
+632,CO,SNTL,Molas Lake,10631,37.74929,-107.68933,San Juan,14080104,Animas,1985-10-01,2100-01-01
+713,CO,SNTL,Red Mountain Pass,11080,37.89168,-107.71389,San Juan,14080104,Animas,1979-10-01,2100-01-01
+739,CO,SNTL,Scotch Creek,9195,37.64562,-108.00833,Dolores,14030002,Upper Dolores,1985-10-01,2100-01-01
+1060,CO,SNTL,Sharkstooth,10747,37.50356,-108.11405,Montezuma,14030002,Upper Dolores,2004-10-01,2100-01-01
+780,CO,SNTL,Spud Mountain,10674,37.69883,-107.77841,San Juan,14080104,Animas,1985-10-01,2100-01-01
+797,CO,SNTL,Stump Lakes,11248,37.47647,-107.63348,La Plata,14080104,Animas,1985-10-01,2100-01-01
+840,CO,SNTL,Upper San Juan,10140,37.48563,-106.83528,Mineral,14080101,Upper San Juan,1978-10-01,2100-01-01
+843,CO,SNTL,Vallecito,10782,37.48524,-107.50748,La Plata,14080101,Upper San Juan,1985-10-01,2100-01-01
+1160,CO,SNTL,Weminuche Creek,10749,37.51968,-107.32139,Hinsdale,14080102,Piedra,2010-10-01,2100-01-01
+874,CO,SNTL,Wolf Creek Summit,10957,37.47903,-106.80234,Mineral,14080101,Upper San Juan,1985-10-01,2100-01-01

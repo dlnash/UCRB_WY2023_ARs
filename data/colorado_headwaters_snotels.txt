@@ -1,0 +1,116 @@
+#------------------------------------------------- WARNING --------------------------------------------
+# 
+# The data you have obtained from this automated Natural Resources Conservation Service 
+# database are subject to revision regardless of indicated Quality Assurance level. 
+# Data are released on condition that neither the NRCS nor the United States Government 
+# may be held liable for any damages resulting from its use. 
+# 
+# SNOTEL air temperature data contains a known bias. This bias is rooted in the sensor 
+# conversion equation and varies through the output range. Solutions are in development. 
+# For more information go to Air Temperature Bias Correction. 
+# 
+# Help and Tutorials: https://www.nrcs.usda.gov/sites/default/files/2023-03/Report%20Generator%20Help%20Guide.pdf
+# Air Temperature Bias Correction: https://www.nrcs.usda.gov/wps/portal/wcc/home/snowClimateMonitoring/temperature/temperatureBiasCorrection/
+# 
+# Support Contact: usdafpacbc@servicenowservices.com
+# 
+#------------------------------------------------------------------------------------------------------
+# 
+# Reporting Frequency: Daily
+# Date Range: 2024-03-12
+#
+# Data for the following site(s) are contained in this file:
+#
+#	SNOTEL 1030: Arapaho Ridge, CO
+#	SNOTEL 1061: Bear River, CO
+#	SNOTEL 1041: Beaver Ck Village, CO
+#	SNOTEL 335: Berthoud Summit, CO
+#	SNOTEL 345: Bison Lake, CO
+#	SNOTEL 913: Buffalo Park, CO
+#	SNOTEL 1101: Chapman Tunnel, CO
+#	SNOTEL 408: Columbine, CO
+#	SNOTEL 415: Copper Mountain, CO
+#	SNOTEL 1120: Elliot Ridge, CO
+#	SNOTEL 485: Fremont Pass, CO
+#	SNOTEL 505: Grizzly Peak, CO
+#	SNOTEL 542: Independence Pass, CO
+#	SNOTEL 547: Ivanhoe, CO
+#	SNOTEL 970: Jones Pass, CO
+#	SNOTEL 556: Kiln, CO
+#	SNOTEL 565: Lake Irene, CO
+#	SNOTEL 607: Lynx Pass, CO
+#	SNOTEL 618: Mc Clure Pass, CO
+#	SNOTEL 1040: Mccoy Park, CO
+#	SNOTEL 622: Mesa Lakes, CO
+#	SNOTEL 1014: Middle Fork Camp, CO
+#	SNOTEL 658: Nast Lake, CO
+#	SNOTEL 669: North Lost Trail, CO
+#	SNOTEL 675: Overland Res., CO
+#	SNOTEL 682: Park Reservoir, CO
+#	SNOTEL 688: Phantom Valley, CO
+#	SNOTEL 737: Schofield Pass, CO
+#	SNOTEL 802: Summit Ranch, CO
+#	SNOTEL 842: Vail Mountain, CO
+#	SNOTEL 869: Willow Creek Pass, CO
+# 
+# Data items provided in this file:
+#
+# Element Name  Value Type  Function Type  Function Duration  Base Data  Measurement Units  Sensor Depth  Element Code  Description  
+# 
+# Quality Control flags included:
+#
+# Flag    Name                Description
+#  V      Valid               Validated Data
+#  N      No Profile          No profile for automated validation
+#  E      Edit                Edit, minor adjustment for sensor noise
+#  B      Back Estimate       Regression-based estimate for homogenizing collocated Snow Course and Snow Pillow data sets
+#  K      Estimate            Estimate
+#  X      External Estimate   External estimate
+#  S      Suspect             Suspect data
+# 
+# Quality Assurance flags included:
+#
+# Flag    Name                Description
+#  U      Unknown             Unknown
+#  R      Raw                 No Human Review
+#  P      Provisional         Preliminary Human Review
+#  A      Approved            Processing and Final Review Completed
+# 
+#------------------------------------------------------------------------------------------------------
+# 
+# Metadata Report
+#
+# As of: Mar 12, 2024, 10:33:03 AM GMT-08:00
+#
+Station Id,State Code,Network Code,Station Name,Elevation,Latitude,Longitude,County Name,HUC8 (8-digit),HUC8 Name,Start Date,End Date
+1030,CO,SNTL,Arapaho Ridge,10976,40.35098,-106.38141,Grand,14010001,Colorado Headwaters,2002-08-01,2100-01-01
+1061,CO,SNTL,Bear River,9112,40.06152,-107.00948,Routt,14050001,Upper Yampa,2004-10-01,2100-01-01
+1041,CO,SNTL,Beaver Ck Village,8565,39.59871,-106.51113,Eagle,14010003,Eagle,2002-11-01,2100-01-01
+335,CO,SNTL,Berthoud Summit,11314,39.80364,-105.77786,Grand,14010001,Colorado Headwaters,1963-09-01,2100-01-01
+345,CO,SNTL,Bison Lake,10964,39.76458,-107.35628,Garfield,14010001,Colorado Headwaters,1985-09-30,2100-01-01
+913,CO,SNTL,Buffalo Park,9249,40.22838,-106.59620,Grand,14010001,Colorado Headwaters,1995-09-01,2100-01-01
+1101,CO,SNTL,Chapman Tunnel,10100,39.26210,-106.62944,Pitkin,14010004,Roaring Fork,2007-09-01,2100-01-01
+408,CO,SNTL,Columbine,9167,40.39591,-106.60437,Jackson,10180001,North Platte Headwaters,1978-10-01,2100-01-01
+415,CO,SNTL,Copper Mountain,10523,39.48917,-106.17154,Summit,14010002,Blue,1978-10-01,2100-01-01
+1120,CO,SNTL,Elliot Ridge,10549,39.86380,-106.42473,Summit,14010002,Blue,2009-08-07,2100-01-01
+485,CO,SNTL,Fremont Pass,11326,39.38014,-106.19784,Summit,14010002,Blue,1979-10-01,2100-01-01
+505,CO,SNTL,Grizzly Peak,11139,39.64646,-105.86940,Summit,14010002,Blue,1979-10-01,2100-01-01
+542,CO,SNTL,Independence Pass,10598,39.07543,-106.61154,Pitkin,14010004,Roaring Fork,1979-10-01,2100-01-01
+547,CO,SNTL,Ivanhoe,10541,39.29228,-106.54907,Pitkin,14010004,Roaring Fork,1991-10-01,2100-01-01
+970,CO,SNTL,Jones Pass,10426,39.76450,-105.90655,Grand,14010001,Colorado Headwaters,1999-09-30,2100-01-01
+556,CO,SNTL,Kiln,9624,39.31720,-106.61501,Pitkin,14010004,Roaring Fork,1979-10-01,2100-01-01
+565,CO,SNTL,Lake Irene,10682,40.41446,-105.81941,Grand,14010001,Colorado Headwaters,1978-10-01,2100-01-01
+607,CO,SNTL,Lynx Pass,8919,40.07832,-106.67095,Routt,14010001,Colorado Headwaters,1979-10-01,2100-01-01
+618,CO,SNTL,Mc Clure Pass,8774,39.12899,-107.28834,Gunnison,14020004,North Fork Gunnison,1979-10-01,2100-01-01
+1040,CO,SNTL,Mccoy Park,9516,39.60231,-106.54400,Eagle,14010003,Eagle,2002-10-01,2100-01-01
+622,CO,SNTL,Mesa Lakes,10168,39.05738,-108.05756,Mesa,14010005,Colorado Headwaters-Plateau,1985-10-01,2100-01-01
+1014,CO,SNTL,Middle Fork Camp,8969,39.79565,-106.02802,Grand,14010001,Colorado Headwaters,2001-09-19,2100-01-01
+658,CO,SNTL,Nast Lake,8731,39.29695,-106.60786,Pitkin,14010004,Roaring Fork,1985-10-01,2100-01-01
+669,CO,SNTL,North Lost Trail,9219,39.07818,-107.14388,Gunnison,14010004,Roaring Fork,1984-10-01,2100-01-01
+675,CO,SNTL,Overland Res.,9893,39.09035,-107.63583,Delta,14020004,North Fork Gunnison,1988-10-01,2100-01-01
+682,CO,SNTL,Park Reservoir,9987,39.04433,-107.87951,Delta,14020005,Lower Gunnison,1978-10-01,2100-01-01
+688,CO,SNTL,Phantom Valley,9045,40.39803,-105.84606,Grand,14010001,Colorado Headwaters,1979-10-01,2100-01-01
+737,CO,SNTL,Schofield Pass,10653,39.01467,-107.04933,Gunnison,14010004,Roaring Fork,1984-10-01,2100-01-01
+802,CO,SNTL,Summit Ranch,9371,39.71803,-106.15770,Summit,14010002,Blue,1979-10-01,2100-01-01
+842,CO,SNTL,Vail Mountain,10310,39.61765,-106.38019,Eagle,14010003,Eagle,1978-10-01,2100-01-01
+869,CO,SNTL,Willow Creek Pass,9523,40.34734,-106.09520,Grand,14010001,Colorado Headwaters,1978-10-01,2100-01-01
