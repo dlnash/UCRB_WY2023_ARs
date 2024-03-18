@@ -10,7 +10,7 @@ import yaml
 import xarray as xr
 import pandas as pd
 
-path_to_repo = '/home/dnash/repos/eaton_scripps_CO_ARs/'
+path_to_repo = '/home/dnash/repos/UCRB_WY2023_ARs/'
 sys.path.append(path_to_repo+'modules')
 from trajectory import calculate_backward_trajectory
 

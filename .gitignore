@@ -1,1 +1,2 @@
 *.pyc
+/preprocess/trajectories/slurm_out/*
