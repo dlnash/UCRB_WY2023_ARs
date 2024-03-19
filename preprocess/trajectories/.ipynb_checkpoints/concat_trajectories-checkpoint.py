@@ -16,7 +16,7 @@ path_to_data = '/expanse/lustre/scratch/dnash/temp_project/'
 HUC8_lst = ['14010001', '14080101']
 
 for j, HUCID in enumerate(HUC8_lst):
-    fname_pattern = '/expanse/lustre/scratch/dnash/temp_project/preprocessed/ERA5_sensitivity_test_trajectories/PRISM_HUC8_{0}*.nc'.format(HUCID)
+    fname_pattern = '/expanse/lustre/scratch/dnash/temp_project/preprocessed/UCRB_trajectories/PRISM_HUC8_{0}*.nc'.format(HUCID)
     fname_lst = glob.glob(fname_pattern)
     # print(fname_lst)
     ds_lst = []
