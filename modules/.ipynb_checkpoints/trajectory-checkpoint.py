@@ -247,15 +247,20 @@ def combine_IVT_and_trajectory(ERA5):
     return ERA5
 
 def combine_arscale_and_trajectory(ERA5, arscale, ar):
+    
+    t = xr.DataArray(ERA5.time.values, dims=['location'], name='time') 
+    
     ## create a list of lat/lons that match MERRA2 spacing
     ## lat and lon points from trajectory
-    new_lst = []
-    for lon in ERA5.lon.values:
-        new_lst.append(find_closest_MERRA2_lon(lon))
-
-    t = xr.DataArray(ERA5.time.values, dims=['location'], name='time') 
-    x = xr.DataArray(new_lst, dims=['location'])
-    y = xr.DataArray(roundPartial(ERA5.lat.values, 0.5), dims=['location'])
+    # new_lst = []
+    # for lon in ERA5.lon.values:
+    #     new_lst.append(find_closest_MERRA2_lon(lon))
+    # x = xr.DataArray(new_lst, dims=['location'])
+    # y = xr.DataArray(roundPartial(ERA5.lat.values, 0.5), dims=['location'])
+    
+    # create a list of lat/lons that match ERA5 spacing
+    x = xr.DataArray(roundPartial(ERA5.lon.values, 0.25), dims=['location'])
+    y = xr.DataArray(roundPartial(ERA5.lat.values, 0.25), dims=['location'])
 
     x = xr.DataArray(ERA5.lon.values, dims=("location"), coords={"lon": x}, name='traj_lons')
     y = xr.DataArray(ERA5.lat.values, dims=("location"), coords={"lat": y}, name='traj_lats')
@@ -264,15 +269,17 @@ def combine_arscale_and_trajectory(ERA5, arscale, ar):
     z = xr.merge([x, y, t])
     
     ## Open text file with coordinates of coastal region along N. America West Coast
-    textpts_fname = '../data/latlon_coast-modified.txt'
+    textpts_fname = '../data/latlon_coast-modified-ERA5.txt'
     df = pd.read_csv(textpts_fname, header=None, sep=' ', names=['latitude', 'longitude'], engine='python')
     df['longitude'] = df['longitude']*-1
 
-    ## create column with closest MERRA2 lons
-    df['MERRA2_lon'] = df.apply(lambda row: find_closest_MERRA2_lon_df(row), axis=1)
-
+    # ## create column with closest MERRA2 lons
+    # df['MERRA2_lon'] = df.apply(lambda row: find_closest_MERRA2_lon_df(row), axis=1)
+    # d = {'lat' : df['latitude'],
+    #     'lon' : df['MERRA2_lon']}
+    
     d = {'lat' : df['latitude'],
-        'lon' : df['MERRA2_lon']}
+        'lon' : df['longitude']}
 
     txtpts = pd.DataFrame(d)
     txtpts = txtpts.drop_duplicates(subset=['lat', 'lon'])
@@ -293,9 +300,11 @@ def combine_arscale_and_trajectory(ERA5, arscale, ar):
         idx = idx_lst[0]
         ## this is the time of the trajectory when it crosses west coast
         time_match = z.sel(location=idx[0]).time.values
+        ERA5 = ERA5.assign(time_match=time_match)
         
         # get the location index value where the lat/lon matches the coastal intersection value
-        idx_ds = int(arscale.location.where((arscale.lat==txtpts.iloc[idx[1]].lat) & (arscale.lon==txtpts.iloc[idx[1]].lon), drop=True).values)
+        arscale_loc = arscale.location.where((arscale.lat==txtpts.iloc[idx[1]].lat) & (arscale.lon==txtpts.iloc[idx[1]].lon), drop=True)
+        idx_ds = int(arscale_loc.values)
         
         #####################
         ### STRICT METHOD ###
@@ -348,5 +357,6 @@ def combine_arscale_and_trajectory(ERA5, arscale, ar):
         ERA5 = ERA5.assign(ar_scale_strict=np.nan)
         ERA5 = ERA5.assign(ar_strict=np.nan)
         ERA5 = ERA5.assign(coastal_IVT_strict=np.nan)
+        ERA5 = ERA5.assign(time_match=np.nan)
 
     return ERA5
