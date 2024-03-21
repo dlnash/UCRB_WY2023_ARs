@@ -11,23 +11,23 @@ import itertools
 import xarray as xr
 import pandas as pd
 
-## get list of HUC8 trajectories
-path_to_data = '/expanse/lustre/scratch/dnash/temp_project/'
-fname = path_to_data + 'preprocessed/PRISM/PRISM_HUC8_CO.nc'
-ds = xr.open_dataset(fname)
+# HUC8_lst = ['14010001', '14080101']
+# name_lst = ['colorado_headwaters', 'upper_san_juan']
+# HUC8_final = []
+# time_lst = []
+# for i, HUC8 in enumerate(HUC8_lst):
+#     ## load list of dates
+#     df = pd.read_csv('../../data/SNOTEL_80th_perc_WY2023_{0}'.format(name_lst[i]))
+#     time = df.time.values
+#     for j, t in enumerate(time):
+#         HUC8_final.append(HUC8)
+#         time_lst.append(t)
 
 HUC8_lst = ['14010001', '14080101']
-name_lst = ['colorado_headwaters', 'upper_san_juan']
-HUC8_final = []
-time_lst = []
-for i, HUC8 in enumerate(HUC8_lst):
-    ## load list of dates
-    df = pd.read_csv('../../data/SNOTEL_80th_perc_WY2023_{0}'.format(name_lst[i]))
-    time = df.time.values
-    for j, t in enumerate(time):
-        HUC8_final.append(HUC8)
-        time_lst.append(t)
-
+df = pd.read_csv('../../data/PRISM_UCRB_80th_percentile_precip_dates.csv')
+date_lst = df.date.values
+a = [HUC8_lst, date_lst]
+dict_lst = list(itertools.product(*a))
 
 jobcounter = 0
 filecounter = 0
@@ -35,13 +35,13 @@ filecounter = 0
 d_lst = []
 dest_lst = []
 njob_lst = []
-for i, (HUC8, time) in enumerate(zip(HUC8_final, time_lst)):
+for i, dlist in enumerate(dict_lst):
     jobcounter += 1
     d = {'job_{0}'.format(jobcounter):
-         {'HUC8_ID': HUC8,
-          'date': time,
+         {'HUC8_ID': dlist[0],
+          'date': dlist[1],
           'lev': 650.,
-          'hour': 12,
+          'hour': 0,
           'grid': 'center'}}
     d_lst.append(d)
     

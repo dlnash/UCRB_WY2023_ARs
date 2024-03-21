@@ -45,8 +45,9 @@ for i, HUC8_ID in enumerate(HUC8_IDs):
     ## load watershed trajectories
     fname = path_to_data + 'preprocessed/UCRB_trajectories/PRISM_HUC8_{0}.nc'.format(HUC8_ID)
     ERA5 = xr.open_dataset(fname)
-    # ERA5 = ERA5.assign_coords({"lon": ERA5.longitude, "lat": ERA5.latitude, "time": ERA5.time})
-    # ERA5 = ERA5.drop_vars(["latitude", "longitude"])
+    ERA5 = ERA5.assign_coords({"lon": ERA5.longitude, "lat": ERA5.latitude, "time": ERA5.time})
+    ERA5 = ERA5.drop_vars(["latitude", "longitude"])
+    ERA5 = ERA5.sel(start_lev=650., grid='center')
 
     ds_lst = []
     ## loop through all trajectories for that watershed

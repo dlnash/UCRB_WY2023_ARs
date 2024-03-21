@@ -1,0 +1,16 @@
+name: UCRB-WY2023
+channels:
+  - conda-forge
+  - defaults  
+dependencies:
+  - python
+  - pip
+  - numpy
+  - xarray
+  - dask
+  - bottleneck
+  - pandas
+  - netCDF4
+  - ipykernel
+  - pyyaml
+  - scipy
