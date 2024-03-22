@@ -247,17 +247,8 @@ def combine_IVT_and_trajectory(ERA5):
     return ERA5
 
 def combine_arscale_and_trajectory(ERA5, arscale, ar):
-    
     t = xr.DataArray(ERA5.time.values, dims=['location'], name='time') 
-    
-    ## create a list of lat/lons that match MERRA2 spacing
-    ## lat and lon points from trajectory
-    # new_lst = []
-    # for lon in ERA5.lon.values:
-    #     new_lst.append(find_closest_MERRA2_lon(lon))
-    # x = xr.DataArray(new_lst, dims=['location'])
-    # y = xr.DataArray(roundPartial(ERA5.lat.values, 0.5), dims=['location'])
-    
+
     # create a list of lat/lons that match ERA5 spacing
     x = xr.DataArray(roundPartial(ERA5.lon.values, 0.25), dims=['location'])
     y = xr.DataArray(roundPartial(ERA5.lat.values, 0.25), dims=['location'])
@@ -267,17 +258,12 @@ def combine_arscale_and_trajectory(ERA5, arscale, ar):
 
     # create a new dataset that has the trajectory lat and lons and the closest MERRA2 lat/lons as coords
     z = xr.merge([x, y, t])
-    
+
     ## Open text file with coordinates of coastal region along N. America West Coast
     textpts_fname = '../data/latlon_coast-modified-ERA5.txt'
     df = pd.read_csv(textpts_fname, header=None, sep=' ', names=['latitude', 'longitude'], engine='python')
     df['longitude'] = df['longitude']*-1
 
-    # ## create column with closest MERRA2 lons
-    # df['MERRA2_lon'] = df.apply(lambda row: find_closest_MERRA2_lon_df(row), axis=1)
-    # d = {'lat' : df['latitude'],
-    #     'lon' : df['MERRA2_lon']}
-    
     d = {'lat' : df['latitude'],
         'lon' : df['longitude']}
 
@@ -297,66 +283,69 @@ def combine_arscale_and_trajectory(ERA5, arscale, ar):
 
     if len(idx_lst) > 0:
         ## take first time the trajectory crosses the coast
-        idx = idx_lst[0]
+        idx_lat = txtpts.iloc[idx[1]].lat
+        idx_lon = txtpts.iloc[idx[1]].lon
+
         ## this is the time of the trajectory when it crosses west coast
         time_match = z.sel(location=idx[0]).time.values
-        ERA5 = ERA5.assign(time_match=time_match)
-        
-        # get the location index value where the lat/lon matches the coastal intersection value
-        arscale_loc = arscale.location.where((arscale.lat==txtpts.iloc[idx[1]].lat) & (arscale.lon==txtpts.iloc[idx[1]].lon), drop=True)
-        idx_ds = int(arscale_loc.values)
-        
+        ts = pd.to_datetime(str(time_match)).strftime('%Y-%m-%d %H')
+        ERA5 = ERA5.assign(time_match=ts)
+
         #####################
         ### STRICT METHOD ###
         #####################
-        
+
         ## Gather arscale of closest grid and time value
-        tmp1 = arscale.sel(location=idx_ds)
-        arscale_val = tmp1.sel(time=time_match, method='nearest').ar_scale.values
+        arscale_val = arscale.sel(lat=idx_lat, lon=idx_lon, time=time_match, method='nearest')['rank'].values
         ERA5 = ERA5.assign(ar_scale_strict=arscale_val)
-        
+
         ## Gather Rutz AR value of closest grid and time value
-        tmp1 = ar.sel(location=idx_ds)
-        ar_val = tmp1.sel(time=time_match, method='nearest').AR.values
+        ar_val = ar.sel(lat=idx_lat, lon=idx_lon, time=time_match, method='nearest')['AR'].values
         ERA5 = ERA5.assign(ar_strict=ar_val)
-        
-        coastal_IVT_val = tmp1.sel(time=time_match, method='nearest').IVT.values
+
+        coastal_IVT_val = arscale.sel(lat=idx_lat, lon=idx_lon, time=time_match, method='nearest')['IVT'].values
         ERA5 = ERA5.assign(coastal_IVT_strict=coastal_IVT_val)
-        
-        
+
+
         #######################
         ### FLEXIBLE METHOD ###
         #######################
-        
-        ## select the surrounding grid points
-        tmp = arscale.sel(location=slice(idx_ds-2, idx_ds+3))
 
         ## select the 12 hours on each side of the time step
+        ## select the surrounding grid points within 1 degree
         sta = time_match - np.timedelta64(12,'h')
         sto = time_match + np.timedelta64(12,'h')
-        arscale_val = tmp.sel(time=slice(sta, sto)).ar_scale.values.max()
+
+        tmp = arscale.sel(lat=slice(idx_lat-2, idx_lat+2), lon=slice(idx_lon-1, idx_lon+1), time=slice(sta, sto))
+        arscale_val = tmp['rank'].max().values
+
+        ## get coastal IVT value
+        coastal_IVT_val = tmp['IVT'].max().values
+
         ## now put those values into the trajectory dataset
         ERA5 = ERA5.assign(ar_scale=arscale_val)
-        
+        ERA5 = ERA5.assign(coastal_IVT=coastal_IVT_val)
+
         ## lets also grab whether rutz et al AR was detected
-        tmp1 = ar.sel(location=slice(idx_ds-2, idx_ds+3))
-        ar_val = tmp1.sel(time=slice(sta, sto)).AR.values.max()
-        
-        coastal_IVT_val = tmp1.sel(time=slice(sta, sto)).IVT.values.max()
+        try:
+            tmp1 = ar.sel(lat=slice(idx_lat-1, idx_lat+1), lon=slice(idx_lon-1, idx_lon+1), time=slice(sta, sto))
+            ar_val = tmp1.AR.values.max()
+        except ValueError:
+            ar_val = np.nan
 
         ## assign value to trajectory dataset
         ERA5 = ERA5.assign(ar=ar_val)
-        ERA5 = ERA5.assign(coastal_IVT=coastal_IVT_val)
-        
+
+
     else:
         ## since the trajectory didn't cross the west coast, set ar_scale to nan
         ERA5 = ERA5.assign(ar_scale=np.nan)
         ERA5 = ERA5.assign(ar=np.nan)
         ERA5 = ERA5.assign(coastal_IVT=np.nan)
-        
+
         ERA5 = ERA5.assign(ar_scale_strict=np.nan)
         ERA5 = ERA5.assign(ar_strict=np.nan)
         ERA5 = ERA5.assign(coastal_IVT_strict=np.nan)
-        ERA5 = ERA5.assign(time_match=np.nan)
+        ERA5 = ERA5.assign(time_match='nan')
 
     return ERA5

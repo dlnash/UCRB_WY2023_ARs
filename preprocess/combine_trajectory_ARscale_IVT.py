@@ -26,14 +26,8 @@ path_to_figs = '../figs/'      # figures
 
 
 ## load Rutz AR
-print('Loading Rutz AR data')
-fname = path_to_data + 'preprocessed/MERRA2/MERRA2_Rutz_US-West.nc'
+fname = path_to_data + 'preprocessed/MERRA2/MERRA2_Rutz_US-West_latlon_2020-2024.nc'
 ar = xr.open_dataset(fname)
-
-## load AR scale
-# print('Loading MERRA2 AR scale')
-# fname = path_to_data + 'preprocessed/MERRA2/MERRA2_ARScale_US-West.nc'
-# arscale = xr.open_dataset(fname)
 
 print('Loading ERA5 AR Scale')
 fname = path_to_data + 'preprocessed/ARScale_ERA5/ERA5_ARScale_WY2023.nc'
@@ -58,7 +52,7 @@ for i, HUC8_ID in enumerate(HUC8_IDs):
     for i, st_date in enumerate(ERA5.start_date.values):
         tmp = ERA5.sel(start_date=st_date)
         ## combine IVT data   
-        tmp = combine_IVT_and_trajectory(tmp)
+        # tmp = combine_IVT_and_trajectory(tmp)
         
         # ## add arscale, Rutz AR, and coastal IVT
         print('Combining AR Scale ... {0}'.format(i))
